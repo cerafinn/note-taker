@@ -11,4 +11,8 @@ router.get('/api/notes', (req, res) => {
   res.json(results);
 });
 
+// router to post new note
+
+// router to remove note
+
 module.exports = router;
