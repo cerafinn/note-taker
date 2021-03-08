@@ -1,18 +1,22 @@
 const router = require('express').Router();
-const notes = require('../db/db.json');
-const filterByTitle = require('../lib/notes')
-
+const fs = require('fs');
+const path = require('path');
+const uuid = require('uuid');
 
 router.get('/api/notes', (req, res) => {
-  let results = notes;
-  if (req.query) {
-    results = filterByTitle(req.query, results);
-  };
-  res.json(results);
+  let notes = JSON.parse(fs.readFileSync('../db/db.json', 'utf8'))
+  return res.json(notes);
 });
 
-// router to post new note
+router.post('api/notes', (req, res) => {
+  const newNote = req.body;
+  newNote.id = uuid.v4();
 
-// router to remove note
+  let notes = JSON.parse(fs.readFileSync('../db/db.json', 'utf8'))
+  notes.push(newNote);
+
+  fs.writeFileSync('../db/db.json', JSON.stringify(notes));
+  res.json(data);
+})
 
 module.exports = router;
