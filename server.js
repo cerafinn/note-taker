@@ -48,7 +48,7 @@ app.get('/api/notes/:id', (req, res) => {
 app.delete('/api/notes/:id', (req, res) => {
   let notes = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
   let noteID = req.params.id;
-
+  notes.splice(noteID, 1);
 
   fs.writeFileSync('./db/db.json', JSON.stringify(notes));
   res.json(notes);
