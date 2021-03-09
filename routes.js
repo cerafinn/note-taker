@@ -35,12 +35,12 @@ router.post('/api/notes', (req, res) => {
 })
 
 router.get('/api/notes/:id', (req, res) => {
-  let notes = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
+  let notes = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
   res.json(notes[Number(req.params.id)]);
 });
 
 router.delete('/api/notes/:id', (req, res) => {
-  let notes = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
+  let notes = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
   let noteID = req.params.id;
   notes.splice(noteID, 1);
 
