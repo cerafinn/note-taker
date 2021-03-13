@@ -12,7 +12,6 @@ Table of Contents |
 [Contributing](#Contributing)
 [Tests](#Tests)
 [Questions](#Questions)
-|
 
 <br />
 
