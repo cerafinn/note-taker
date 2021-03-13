@@ -3,22 +3,6 @@ const path = require('path');
 const fs = require('fs')
 const uuid = require('uuid');
 
-router.get('/notes', (req, res) => {
-  res.sendFile(path.join(__dirname, './public/notes.html'));
-});
-
-router.get('/api/notes', (req, res) => {
-  res.sendFile(path.join(__dirname, './db/db.json'));
-});
-
-router.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, './public/index.html'));
-});
-
-router.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, './public/index.html'));
-});
-
 router.get('/api/notes', (req, res) => {
   let notes = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'))
   return res.json(notes);
@@ -34,17 +18,14 @@ router.post('/api/notes', (req, res) => {
   res.json(notes);
 })
 
-router.get('/api/notes/:id', (req, res) => {
-  let notes = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
-  res.json(notes[Number(req.params.id)]);
-});
-
 router.delete('/api/notes/:id', (req, res) => {
   let notes = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
-  let noteID = req.params.id;
-  notes.splice(noteID, 1);
 
-  fs.writeFileSync('./db/db.json', JSON.stringify(notes));
+  const newNotes = notes.filter( note => {
+    return note.id !==req.params.id;
+  })
+
+  fs.writeFileSync('./db/db.json', JSON.stringify(newNotes));
   res.json(notes);
 });
 
