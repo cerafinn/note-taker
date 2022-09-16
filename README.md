@@ -43,8 +43,6 @@ Feel free to reach out using the contact information below if you wish to contri
 
 <br />
 
-
-
 ## Tests
 
 No tests
